@@ -1,0 +1,20 @@
+//  http://leaftaps.com/opentaps/
+
+import test, { chromium } from "@playwright/test";
+
+test('learn to launch the browser', async() => {
+
+    let browser = await chromium.launch({channel: 'chrome'})
+    let context = await browser.newContext()
+    let page = await context.newPage()
+
+    await page.goto('http://leaftaps.com/opentaps/')
+
+    await page.waitForLoadState('domcontentloaded')
+    
+    await page.waitForTimeout(3000)
+
+    let title = await page.title()
+    console.log(title);
+    
+})

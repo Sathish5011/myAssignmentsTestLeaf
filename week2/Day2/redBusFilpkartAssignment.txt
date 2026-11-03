@@ -1,0 +1,35 @@
+
+import { test, chromium, webkit } from '@playwright/test';
+
+test('Launch RedBus in Edge and Flipkart in WebKit', async () => {
+
+    const edgeBrw1 = await chromium.launch({channel: 'msedge'})
+
+    const edgePage = await edgeBrw1.newPage()
+
+    await edgePage.goto('https://www.redbus.in/')
+    await edgePage.waitForLoadState('domcontentloaded')
+
+    const edgeTitle = await edgePage.title()
+
+    const edgeUrl = await edgePage.url()
+
+    console.log('---RedBus---');
+    console.log('URL:',edgeUrl);
+    console.log('Title:',edgeTitle);
+    
+    const webkbrw2 = await webkit.launch()
+
+    const webPage = await webkbrw2.newPage()
+    await webPage.goto('https://www.flipkart.com/')
+
+    await webPage.waitForLoadState('domcontentloaded')
+
+    const webUrl = await webPage.url()
+    const webTitle = await webPage.title()
+
+     console.log('---Filpkart---');
+    console.log('URL:',webUrl);
+    console.log('Title:',webTitle);
+
+})
